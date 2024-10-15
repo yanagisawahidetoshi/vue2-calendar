@@ -9,13 +9,17 @@
 </template>
 
 <script>
+import { startOfMonth, lastDayOfMonth, eachDayOfInterval } from "date-fns";
 export default {
   name: "App",
   components: {},
-  data(){
-    return {
-      dates:[...Array(31)].map((_, i) => i + 1)
-    }
+  computed: {
+    dates() {
+      const now = new Date();
+      const start = startOfMonth(now);
+      const end = lastDayOfMonth(now);
+      return eachDayOfInterval({ start, end });
+    },
   },
 };
 </script>
