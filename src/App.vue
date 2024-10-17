@@ -9,16 +9,20 @@
 </template>
 
 <script>
-import { startOfMonth, lastDayOfMonth, eachDayOfInterval } from "date-fns";
+import {
+  getStartOfMonth,
+  getLastDayOfMonth,
+  getEachDayOfInterval,
+} from "./libs/date-fns";
 export default {
   name: "App",
   components: {},
   computed: {
     dates() {
       const now = new Date();
-      const start = startOfMonth(now);
-      const end = lastDayOfMonth(now);
-      return eachDayOfInterval({ start, end });
+      const start = getStartOfMonth(now);
+      const end = getLastDayOfMonth(now);
+      return getEachDayOfInterval({ start, end });
     },
   },
 };
