@@ -2,7 +2,7 @@
   <div id="app">
     <ol>
       <li v-for="date in dates" :key="date">
-        <p>{{ date }}</p>
+        <p>{{ formatDate(date) }}</p>
       </li>
     </ol>
   </div>
@@ -13,6 +13,7 @@ import {
   getStartOfMonth,
   getLastDayOfMonth,
   getEachDayOfInterval,
+  format,
 } from "./libs/date-fns";
 export default {
   name: "App",
@@ -23,6 +24,11 @@ export default {
       const start = getStartOfMonth(now);
       const end = getLastDayOfMonth(now);
       return getEachDayOfInterval({ start, end });
+    },
+  },
+  methods: {
+    formatDate(date) {
+      return format(date, "MM月dd日");
     },
   },
 };
