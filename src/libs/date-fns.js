@@ -2,6 +2,7 @@ import {
   startOfMonth,
   lastDayOfMonth,
   eachDayOfInterval,
+  addMonths as dateFnsAddMonths,
   format as dateFnsFormat,
 } from "date-fns";
 import ja from "date-fns/locale/ja";
@@ -14,6 +15,9 @@ export const getLastDayOfMonth = (now) => {
 };
 export const getEachDayOfInterval = ({ start, end }) => {
   return eachDayOfInterval({ start, end });
+};
+export const addMonths = (date, number) => {
+  return dateFnsAddMonths(date, number);
 };
 export const format = (date, dateFormat) => {
   return dateFnsFormat(date, dateFormat, { locale: ja });
