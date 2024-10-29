@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <ul>
-      <li><button type="button" @click="changeMonth">先月</button></li>
-      <li><button type="button">当月</button></li>
-      <li><button type="button">翌月</button></li>
+      <li><button type="button" @click="changeMonth(-1)">先月</button></li>
+      <li><button type="button" @click="changeCurrentMonth">当月</button></li>
+      <li><button type="button" @click="changeMonth(1)">翌月</button></li>
     </ul>
     <ol>
       <li v-for="(date, index) in dates" :key="index">
@@ -40,8 +40,11 @@ export default {
     formatDate(date) {
       return format(date, "MM月dd日");
     },
-    changeMonth() {
-      this.currentDate = addMonths(this.currentDate, -1);
+    changeMonth(num) {
+      this.currentDate = addMonths(this.currentDate, num);
+    },
+    changeCurrentMonth() {
+      this.currentDate = new Date();
     },
   },
 };
