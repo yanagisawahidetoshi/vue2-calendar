@@ -3,8 +3,8 @@
     <CalenderHeader
       :year="currentDate.getFullYear()"
       :month="formattedMonth"
-      @onClickPrevMonth="handlePrevMonth"
-      @onClickNextMonth="handleNextMonth"
+      @onClickPrevMonth="handleChangeMonth(-1)"
+      @onClickNextMonth="handleChangeMonth(1)"
       @registerSchedule="handleRegisterSchedule"
     />
     <ol class="calendar">
@@ -25,6 +25,7 @@ import {
   eachDayOfInterval,
   format,
   addMonths,
+  parse,
 } from "date-fns";
 import { ja } from "date-fns/locale";
 import CalenderHeader from "./components/CalenderHeader";
@@ -37,7 +38,7 @@ export default {
   },
   data() {
     return {
-      currentDate: new Date(),
+      currentDate: null,
       schedules: [],
     };
   },
@@ -55,11 +56,8 @@ export default {
     formatDate(date) {
       return format(date, "E", { locale: ja });
     },
-    handleNextMonth() {
-      this.currentDate = addMonths(this.currentDate, 1);
-    },
-    handlePrevMonth() {
-      this.currentDate = addMonths(this.currentDate, -1);
+    handleChangeMonth(amount) {
+      this.currentDate = addMonths(this.currentDate, amount);
     },
     handleRegisterSchedule(data) {
       const id = this.schedules.length > 0 ? this.schedules.at(-1).id + 1 : 1;
@@ -70,6 +68,26 @@ export default {
       return this.schedules.filter(
         (schedule) => schedule.date === formattedDate
       );
+    },
+  },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const year = urlParams.get("year");
+    const month = urlParams.get("month");
+
+    if (year && month) {
+      const dateStr = `${year}-${month}-01`;
+      this.currentDate = parse(dateStr, "yyyy-MM-dd", new Date());
+    } else {
+      this.currentDate = new Date();
+    }
+  },
+  watch: {
+    currentDate(newDate) {
+      const year = format(newDate, "yyyy");
+      const month = format(newDate, "MM");
+      const newUrl = `${window.location.pathname}?year=${year}&month=${month}`;
+      window.history.replaceState(null, "", newUrl);
     },
   },
 };
