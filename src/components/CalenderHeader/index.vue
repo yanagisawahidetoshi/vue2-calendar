@@ -21,9 +21,11 @@
   </div>
 </template>
 <script>
+import { defineComponent } from "@vue/composition-api";
 import ScheduleRegistration from "../ScheduleRegistration";
+import { useHooks } from "./hooks/useHooks";
 
-export default {
+export default defineComponent({
   name: "CalenderHeader",
   components: {
     ScheduleRegistration,
@@ -38,12 +40,23 @@ export default {
       required: true,
     },
   },
-  computed: {
-    title() {
-      return `${this.year}年${this.month}月`;
-    },
+  // 引数を分割代入で取得してしまうと、リアクティブではなくなってしまうので注意
+  setup(props, { emit }) {
+    const {
+      title,
+      emitClickPrevMonth,
+      emitClickNextMonth,
+      emitRegisterSchedule,
+    } = useHooks(props, emit);
+
+    return {
+      title,
+      emitClickPrevMonth,
+      emitClickNextMonth,
+      emitRegisterSchedule,
+    };
   },
-};
+});
 </script>
 
 <style scoped>
