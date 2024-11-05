@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-    <ul>
-      <li><button type="button" @click="changeMonth(-1)">先月</button></li>
-      <li><button type="button" @click="changeCurrentMonth">当月</button></li>
-      <li><button type="button" @click="changeMonth(1)">翌月</button></li>
-    </ul>
+    <CalenderHeader />
     <ol>
       <li v-for="(date, index) in dates" :key="index">
-        <p>{{ formatDate(date) }}</p>
+        <DateRow :date="date" />
       </li>
     </ol>
   </div>
@@ -21,9 +17,16 @@ import {
   format,
   addMonths,
 } from "./libs/date-fns";
+
+import CalenderHeader from "./components/CalenderHeader";
+import DateRow from "./components/DateRow";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    CalenderHeader,
+    DateRow,
+  },
   data() {
     return {
       currentDate: new Date(),

@@ -2,7 +2,7 @@
   <p>{{ formatDate(date) }}</p>
 </template>
 <script>
-import { format } from "./libs/date-fns";
+import { format } from "../libs/date-fns";
 export default {
   name: "DateRow",
   props: {
