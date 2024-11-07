@@ -1,13 +1,32 @@
 <template>
-  <ul>
-    <li><button type="button" @click="changeMonth(-1)">先月</button></li>
-    <li><button type="button" @click="changeCurrentMonth">当月</button></li>
-    <li><button type="button" @click="changeMonth(1)">翌月</button></li>
-  </ul>
+  <div>
+    <h1>{{ title }}</h1>
+    <ul>
+      <li>
+        <button type="button" @click="$emit('changeToPrevMonth')">先月</button>
+      </li>
+      <li>
+        <button type="button" @click="$emit('changeCurrentMonth')">当月</button>
+      </li>
+      <li>
+        <button type="button" @click="$emit('changeToNextMonth')">翌月</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
+import { format } from "../libs/date-fns";
+
 export default {
   name: "CalenderHeader",
+  props: {
+    currentDate: { type: Date },
+  },
+  computed: {
+    title() {
+      return format(this.currentDate, "yyyy年MM月");
+    },
+  },
 };
 </script>
