@@ -50,6 +50,7 @@ export default {
     },
     changeMonth(num) {
       this.currentDate = addMonths(this.currentDate, num);
+      history.pushState({}, '', '/2024/11');
     },
     changeCurrentMonth() {
       this.currentDate = new Date();
