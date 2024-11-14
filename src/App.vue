@@ -56,5 +56,13 @@ export default {
       this.currentDate = new Date();
     },
   },
+  mounted(){
+    // ~/{西暦４桁}/{月1or2桁} を判断する正規表現。どんなURLにも対応できるように
+    const url = 'http://localhost:8082/2024/11';
+    // .{10}
+    if (url) {
+      
+    }
+  }
 };
 </script>
