@@ -58,11 +58,12 @@ export default {
   },
   mounted(){
     // ~/{西暦４桁}/{月1or2桁} を判断する正規表現。どんなURLにも対応できるように
-    const url = 'http://localhost:8082/2024/11';
+    const url = 'http://localhost:8082/2024/01/';
     // .{10}
-    if (url) {
-      
-    }
+    const matchUrl = url.match(/^https?:\/\/.+\/(\d{4})\/(0?[1-9]|1[0-2])\/?/);
+    console.log(matchUrl[1]);
+    console.log(matchUrl[2]);
+    // this.currentDate = matchUrl[1] matchUrl[2]
   }
 };
 </script>
