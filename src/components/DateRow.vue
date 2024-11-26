@@ -6,7 +6,7 @@ import { format } from "../libs/date-fns";
 export default {
   name: "DateRow",
   props: {
-    date: { type: String },
+    date: { type: Date },
   },
   methods: {
     formatDate(date) {
