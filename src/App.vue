@@ -21,6 +21,7 @@ import {
   getEachDayOfInterval,
   format,
   addMonths,
+  parse,
 } from "./libs/date-fns";
 
 import CalenderHeader from "./components/CalenderHeader";
@@ -44,26 +45,25 @@ export default {
       return getEachDayOfInterval({ start, end });
     },
   },
+  mounted() {
+    // ~/{西暦４桁}/{月1or2桁} を判断する正規表現。どんなURLにも対応できるように
+    // const pathName = location.pathname;
+    // const match = pathName.match(/\d{4}\/(\d{2})\/?/);
+    // const match = pathName.match(/^https?:\/\/.+\/(\d{4})\/(0?[1-9]|1[0-2])\/?$/);
+    // this.currentDate = parse("2024/11/", "yyyy/MM/");
+    // console.log(parse("2024/11/1", "yyyy/MM/DD"));
+  },
   methods: {
     formatDate(date) {
       return format(date, "MM月dd日");
     },
     changeMonth(num) {
       this.currentDate = addMonths(this.currentDate, num);
-      history.pushState({}, '', '/2024/11');
+      history.pushState({}, "", "/2024/11");
     },
     changeCurrentMonth() {
       this.currentDate = new Date();
     },
   },
-  mounted(){
-    // ~/{西暦４桁}/{月1or2桁} を判断する正規表現。どんなURLにも対応できるように
-    const url = 'http://localhost:8082/2024/01/';
-    // .{10}
-    const matchUrl = url.match(/^https?:\/\/.+\/(\d{4})\/(0?[1-9]|1[0-2])\/?/);
-    console.log(matchUrl[1]);
-    console.log(matchUrl[2]);
-    // this.currentDate = matchUrl[1] matchUrl[2]
-  }
 };
 </script>

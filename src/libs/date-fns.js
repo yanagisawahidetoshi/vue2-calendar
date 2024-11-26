@@ -23,6 +23,6 @@ export const addMonths = (date, number) => {
 export const format = (date, dateFormat) => {
   return dateFnsFormat(date, dateFormat, { locale: ja });
 };
-export const parse = (string, dateFormat) => {
-  return dateFnsParse(string, dateFormat, new Date());
-}
+export const parse = (dateString, dateFormat) => {
+  return dateFnsParse(dateString, dateFormat, new Date());
+};
