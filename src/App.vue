@@ -47,11 +47,10 @@ export default {
   },
   mounted() {
     // ~/{西暦４桁}/{月1or2桁} を判断する正規表現。どんなURLにも対応できるように
-    // const pathName = location.pathname;
-    // const match = pathName.match(/\d{4}\/(\d{2})\/?/);
-    // const match = pathName.match(/^https?:\/\/.+\/(\d{4})\/(0?[1-9]|1[0-2])\/?$/);
-    // this.currentDate = parse("2024/11/", "yyyy/MM/");
-    // console.log(parse("2024/11/1", "yyyy/MM/DD"));
+    const pathName = location.pathname;
+    const match = pathName.match(/\/(\d{4})\/(0?[1-9]|1[0-2])\/?$/);
+    console.log(match);
+    this.currentDate = parse("2024/11/", "yyyy/MM/");
   },
   methods: {
     formatDate(date) {
